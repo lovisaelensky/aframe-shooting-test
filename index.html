@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/0.7.1/aframe.min.js"></script>
+  <script src="https://codechangers.com/physics.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  <script
+    src="https://unpkg.com/aframe-fps-look-controls-component/dist/aframe-fps-look-controls-component.min.js"></script>
+  <script src="https://unpkg.com/aframe-animation-component@^4.1.2/dist/aframe-animation-component.min.js"></script>
+</head>
+
+<body>
+  <a-scene id="myScene">
+
+    <a-assets>
+      <a-asset-item id="virus" src="assets/tinker.gltf"></a-asset-item>
+      <a-asset-item id="coronaSound" src="sounds/coronavirus.mp3" response-type="arraybuffer"></a-asset-item>
+    </a-assets>
+
+    <a-entity id="collisionSound" sound="src: #coronaSound; poolSize: 15" position="0 1.6 0"></a-entity>
+
+    <a-plane id="floor" static-body height="1000" width="1000" position="0 -0.02 0" color="black" rotation="-90 0 0">
+    </a-plane>
+
+    <!-- CAMERA, CURSOR & MOVEMENT CONTROLS -->
+    <a-entity movement-controls="speed: 0.25; constrainToNavMesh: true">
+      <a-entity camera id="myCamera" position="0 1.6 0" fps-look-controls>
+        <a-cursor intersection-spawn="event: click; mixin: voxel"></a-cursor>
+      </a-entity>
+    </a-entity>
+
+    <a-entity static-body gltf-model="#virus" class="target" position="-4 3 -10" scale="0.04 0.04 0.04"
+      animation__rotation="property: rotation; dir: alternate; dur: 5000; loop: true; easing: linear; to: 0 0 360;"
+      animation__position="property: position; to: 1 8 -10; dur: 2000; easing: linear; loop: true; dir: alternate;">
+    </a-entity>
+
+    <a-entity static-body gltf-model="#virus" class="target" position="-8 3 -12" scale="0.02 0.02 0.02"
+      animation__rotation="property: rotation; dir: alternate; dur: 5000; loop: true; easing: linear; to: 0 0 360;"
+      animation__position="property: position; to: 4 8 -5; dur: 4000; easing: linear; loop: true; dir: alternate;">
+    </a-entity>
+
+    <!-- <a-icosahedron static-body class="target" color="red" radius="1" position="-2 3 -5"
+      animation__rotation="property: rotation; dir: alternate; dur: 5000; loop: true; easing: linear; to: 0 0 360;"
+      animation__position="property: position; to: 1 8 -10; dur: 2000; easing: linear; loop: true; dir: alternate;">
+    </a-icosahedron> -->
+
+    <a-icosahedron static-body class="target" color="white" radius="1" position="2 3 -5"></a-icosahedron>
+  </a-scene>
+</body>
+<script src="https://codechangers.com/camps2019/vr/shoot-partial.js"></script>
+<script src="script.js"></script>
+<script>nextLevel = 'level2.html';</script>
+
+</html>
